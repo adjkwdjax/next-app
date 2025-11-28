@@ -37,7 +37,7 @@ function RoomScreen(props: { roomId: string, header }) {
             </div>
 
             <div id="rightBlock" className="bg-[#282828] rounded-xl flex-1 flex flex-col min-h-full gap-2 overflow-hidden p-2">
-                <div id="scrollBar" className="border border-[#4a4a4a] rounded-xl w-full h-11/12 min-h-0 overflow-auto">
+                <div id="scrollBar" className="border border-[#4a4a4a] rounded-xl w-full h-11/12 min-h-0 overflow-auto max-w-full">
                     <div className="min-h-60">12345678</div>
                     <div className="min-h-60">12345678</div>
                     <div className="min-h-60">12345678</div>
