@@ -1,23 +1,26 @@
-// hooks/useVideoWatch.ts
 import { useRef, useState, useCallback } from "react";
 
-export function useVideoWatch() {
+import type { Video } from '@/types/video.types'
+
+
+export function useVideoWatch(video: Video) {
     const videoRef = useRef<HTMLVideoElement>(null);
     const [isPlaying, setIsPlaying] = useState(false);
 
     const togglePlay = useCallback(() => {
-        // videoRef уже привязан когда вызывается togglePlay
         if (!videoRef.current) return;
         
-        if (videoRef.current.paused) {
+        if (!isPlaying) {
             videoRef.current.play();
+            setIsPlaying(!isPlaying);
         } else {
             videoRef.current.pause();
+            setIsPlaying(!isPlaying);
         }
-    }, []);
+    }, [isPlaying]);
 
     return {
-        videoRef, // Хук сам управляет ref
+        videoRef,
         isPlaying,
         togglePlay
     };

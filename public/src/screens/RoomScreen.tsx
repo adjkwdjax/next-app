@@ -1,17 +1,18 @@
 import { io } from "socket.io-client";
 import { useEffect } from "react";
+import type { Room } from '@/types';
 
-import VideoPlayer from "../components/VideoPlayer";
+import { VideoRoute } from "../components/VideoRoute";
 
 import 'reactjs-popup/dist/index.css';
 
-function RoomScreen(props: { roomId: string, header }) {
+function RoomScreen(room: Room) {
     useEffect(() => {
         const newSocket = io('http://localhost:3000');
 
         newSocket.on('connect', () => {
             console.log('✅ Подключились к серверу, ID:', newSocket.id);
-            newSocket.emit('join-room', props.roomId);
+            newSocket.emit('join-room', room.room_id);
         });
 
         newSocket.on('disconnect', () => {
@@ -26,13 +27,13 @@ function RoomScreen(props: { roomId: string, header }) {
             console.log('🧹 Очистка компонента, отключаем socket');
             newSocket.disconnect();
         };
-    }, [props.roomId]);
+    }, [room.room_id]);
 
     return(
         <div className="flex w-full relative h-full sm:flex-row flex-col rounded-xl gap-2 p-4">
             <div id="leftBlock" className="bg-[#282828] relative sm:w-3/4 w-full min-h-full rounded-xl"> 
 
-                <VideoPlayer />
+                <VideoRoute />
 
             </div>
 

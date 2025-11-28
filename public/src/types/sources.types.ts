@@ -1,0 +1,1 @@
+export type sources = 'youtube' | 'vk' | 'zona' | 'url';

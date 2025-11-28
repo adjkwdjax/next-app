@@ -1,8 +1,10 @@
 // VideoRoute.tsx
 import { useVideoWatch } from '../hooks/useVideoWatch';
 
-export default function VideoRoute() {
-    const { videoRef, togglePlay } = useVideoWatch();
+import type { Room } from '@/types';
+
+export default function VideoPlayer(room: Room) {
+    const { videoRef, togglePlay } = useVideoWatch(room.currentVideo);
 
     return (
         <div className='border w-full h-full rounded-xl relative'>
