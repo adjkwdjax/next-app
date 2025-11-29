@@ -27,7 +27,7 @@ function Header({ user }) {
           </div>
           <button 
             onClick={() => setIsSettingsOpen(true)}
-            className="bg-[#3e3e3e] w-auto min-w-[80px] sm:min-w-[100px] h-8 sm:h-10 px-3 rounded-[5px] flex items-center justify-center hover:bg-[#4f4f4f] whitespace-nowrap shrink-0 ml-2"
+            className="bg-[#3e3e3e] w-auto min-w-20 sm:min-w-[100px] h-8 sm:h-10 px-3 rounded-[5px] flex items-center justify-center hover:bg-[#4f4f4f] whitespace-nowrap shrink-0 ml-2"
           >
             изменить
           </button>

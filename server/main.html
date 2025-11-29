@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Поиск фильмов Zona</title>
+  <style>
+    body { font-family: sans-serif; background-color: #101010; color: #f1f1f1; }
+    input, button { padding: 8px; margin: 5px; }
+    ul { list-style: none; padding: 0; }
+    li { display: flex; align-items: center; margin-bottom: 10px; background: #1e1e1e; padding: 10px; border-radius: 6px; }
+    img { width: 80px; margin-right: 10px; border-radius: 4px; }
+    .info { line-height: 1.4; }
+    .info span { display: block; }
+  </style>
+</head>
+<body>
+  <h1>Поиск фильмов</h1>
+  <input type="text" id="query" placeholder="Введите название фильма" />
+  <button id="searchBtn">Поиск</button>
+
+  <ul id="results"></ul>
+
+  <script>
+    document.querySelector("#searchBtn").addEventListener("click", async () => {
+      const query = document.querySelector("#query").value.trim();
+      if (!query) return alert("Введите название фильма");
+
+      const ts = Date.now();
+      const url = `https://w140.zona.plus/ajax/suggest/${encodeURIComponent(query)}?ts=${ts}`;
+
+      try {
+        const response = await fetch(url, {
+          headers: {
+            "accept": "application/json, text/javascript, */*; q=0.01",
+            "x-requested-with": "XMLHttpRequest"
+          }
+        });
+        const data = await response.json();
+        const list = document.querySelector("#results");
+        list.innerHTML = "";
+
+        if (!data.items || data.items.length === 0) {
+          list.innerHTML = "<li>Ничего не найдено.</li>";
+          return;
+        }
+
+        for (const item of data.items) {
+          const li = document.createElement("li");
+          li.innerHTML = `
+            <img src="${item.cover}" alt="${item.name_rus}">
+            <div class="info">
+              <span><strong>${item.name_rus}</strong> (${item.year})</span>
+              <span>${item.name_original || "—"}</span>
+              <span>${item.serial ? "Сериал" : "Фильм"}</span>
+            </div>
+          `;
+          list.appendChild(li);
+        }
+      } catch (err) {
+        console.error(err);
+        alert("Ошибка при загрузке данных");
+      }
+    });
+  </script>
+</body>
+</html>

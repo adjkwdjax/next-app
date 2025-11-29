@@ -2,7 +2,7 @@ import { io } from "socket.io-client";
 import { useEffect } from "react";
 import type { Room } from '@/types';
 
-import { VideoRoute } from "../components/VideoRoute";
+import { VideoSearch } from "../components/VideoSearch";
 
 import 'reactjs-popup/dist/index.css';
 
@@ -31,14 +31,12 @@ function RoomScreen(room: Room) {
 
     return(
         <div className="flex w-full relative h-full sm:flex-row flex-col rounded-xl gap-2 p-4">
-            <div id="leftBlock" className="bg-[#282828] relative sm:w-3/4 w-full min-h-full rounded-xl"> 
-
-                <VideoRoute />
-
+            <div id="leftBlock" className="bg-[#282828] relative sm:w-3/4 w-full min-h-3/4 rounded-xl"> 
+                <VideoSearch /> 
             </div>
 
             <div id="rightBlock" className="bg-[#282828] rounded-xl flex-1 flex flex-col min-h-full gap-2 overflow-hidden p-2">
-                <div id="scrollBar" className="border border-[#4a4a4a] rounded-xl w-full h-11/12 min-h-0 overflow-auto max-w-full">
+                <div id="scrollBar" className="border border-[#4a4a4a] rounded-xl w-full h-11/12 min-h-0 overflow-auto max-w-full scrollbar">
                     <div className="min-h-60">12345678</div>
                     <div className="min-h-60">12345678</div>
                     <div className="min-h-60">12345678</div>
